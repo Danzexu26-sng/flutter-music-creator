@@ -1,0 +1,32 @@
+name: flutter_music_creator
+description: "A feature-first Flutter music creation app with recorder and sequencer."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # State Management
+  provider: ^6.0.0
+  
+  # Audio Processing
+  audioplayers: ^5.2.0
+  
+  # File System Access
+  path_provider: ^2.1.0
+  
+  # Reactive Programming
+  rxdart: ^0.27.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_linter: ^2.0.0
+
+flutter:
+  uses-material-design: true
