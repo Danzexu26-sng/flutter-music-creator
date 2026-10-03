@@ -1,31 +1,38 @@
-import 'package:audioplayers/audioplayers.dart';
+import 'dart:async';
 import 'dart:io';
+
+import 'package:audioplayers/audioplayers.dart';
 
 class AudioService {
   final AudioPlayer _audioPlayer = AudioPlayer();
-  final AudioPlayer _recorderPlayer = AudioPlayer();
 
   Future<void> playAudio(String filePath) async {
     try {
       await _audioPlayer.play(DeviceFileSource(filePath));
-    } catch (e) {
-      print('Error playing audio: $e');
+    } catch (error) {
+      if (kDebugMode) {
+        print('Audio playback error: $error');
+      }
     }
   }
 
   Future<void> stopPlayback() async {
     try {
       await _audioPlayer.stop();
-    } catch (e) {
-      print('Error stopping playback: $e');
+    } catch (error) {
+      if (kDebugMode) {
+        print('Stop playback error: $error');
+      }
     }
   }
 
   Future<void> pausePlayback() async {
     try {
       await _audioPlayer.pause();
-    } catch (e) {
-      print('Error pausing playback: $e');
+    } catch (error) {
+      if (kDebugMode) {
+        print('Pause playback error: $error');
+      }
     }
   }
 
@@ -35,6 +42,5 @@ class AudioService {
 
   Future<void> dispose() async {
     await _audioPlayer.dispose();
-    await _recorderPlayer.dispose();
   }
 }
