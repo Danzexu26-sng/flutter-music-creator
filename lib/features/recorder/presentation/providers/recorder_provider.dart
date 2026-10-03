@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import '../../../config/app_config.dart';
-import '../../../core/services/recorder_service.dart';
+import '../../../../config/app_config.dart';
+import '../../../../core/services/recorder_service.dart';
 
 class RecorderProvider extends ChangeNotifier {
   final RecorderService _recorderService = RecorderService();

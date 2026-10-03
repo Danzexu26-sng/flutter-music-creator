@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../../../recorder/presentation/pages/recorder_page.dart';
 import '../../../sequencer/presentation/pages/sequencer_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -12,9 +13,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    const RecorderPage(),
-    const SequencerPage(),
+  final List<Widget> _pages = const [
+    RecorderPage(),
+    SequencerPage(),
   ];
 
   @override
@@ -22,6 +23,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.mic),
@@ -32,12 +39,6 @@ class _HomePageState extends State<HomePage> {
             label: 'Sequencer',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
       ),
     );
   }

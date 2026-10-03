@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../config/app_config.dart';
 import '../../../../core/models/audio_track.dart';
 import '../providers/sequencer_provider.dart';
 
@@ -31,7 +30,9 @@ class SequencerPage extends StatelessWidget {
                         max: 180,
                         divisions: 120,
                         label: sequencerProvider.currentBPM.toString(),
-                        onChanged: (value) => sequencerProvider.setBPM(value.round()),
+                        onChanged: (value) {
+                          sequencerProvider.setBPM(value.round());
+                        },
                       ),
                     ),
                     Text(sequencerProvider.currentBPM.toString()),
@@ -42,9 +43,7 @@ class SequencerPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: sequencerProvider.tracks.isEmpty
-                            ? null
-                            : () => sequencerProvider.playSequence(),
+                        onPressed: sequencerProvider.tracks.isEmpty ? null : () => sequencerProvider.playSequence(),
                         icon: const Icon(Icons.play_arrow),
                         label: const Text('Play'),
                       ),
@@ -52,9 +51,7 @@ class SequencerPage extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: sequencerProvider.isPlaying
-                            ? () => sequencerProvider.stopSequence()
-                            : null,
+                        onPressed: sequencerProvider.isPlaying ? () => sequencerProvider.stopSequence() : null,
                         icon: const Icon(Icons.stop),
                         label: const Text('Stop'),
                       ),
@@ -64,13 +61,13 @@ class SequencerPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 ElevatedButton.icon(
                   onPressed: () {
-                    final trackFilePath = '${AppConfig.audioDirectory.path}/demo_track_${DateTime.now().millisecondsSinceEpoch}.m4a';
                     final track = AudioTrack(
                       id: DateTime.now().millisecondsSinceEpoch.toString(),
                       name: 'Track ${sequencerProvider.tracks.length + 1}',
-                      filePath: trackFilePath,
+                      filePath: 'demo_track_${DateTime.now().millisecondsSinceEpoch}.m4a',
                       duration: const Duration(seconds: 8),
                     );
+
                     sequencerProvider.addTrack(track);
                   },
                   icon: const Icon(Icons.queue_music),
@@ -85,11 +82,10 @@ class SequencerPage extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final track = sequencerProvider.tracks[index];
                             return Card(
-                              margin: const EdgeInsets.only(bottom: 8),
                               child: ListTile(
                                 leading: const Icon(Icons.music_note),
                                 title: Text(track.name),
-                                subtitle: Text('${track.duration.inSeconds}s • ${track.filePath}'),
+                                subtitle: Text(track.filePath),
                                 trailing: IconButton(
                                   icon: const Icon(Icons.delete_outline),
                                   onPressed: () => sequencerProvider.removeTrack(track.id),

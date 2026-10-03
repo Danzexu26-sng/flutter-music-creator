@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
-import '../../../config/app_config.dart';
 import '../providers/recorder_provider.dart';
 
 class RecorderPage extends StatelessWidget {
@@ -50,10 +49,15 @@ class RecorderPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 if (recorderProvider.currentRecordingPath != null)
-                  Text(
-                    'Last file: ${recorderProvider.currentRecordingPath!}',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      'Last file: ${recorderProvider.currentRecordingPath!}',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
                   ),
               ],
             );

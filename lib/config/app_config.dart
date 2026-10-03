@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:path_provider/path_provider.dart';
+
 class AppConfig {
   static late final Directory _appDocDir;
   static late final Directory _audioDir;

@@ -9,6 +9,7 @@ import 'features/sequencer/presentation/providers/sequencer_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppConfig.initialize();
+
   runApp(const MyApp());
 }
 

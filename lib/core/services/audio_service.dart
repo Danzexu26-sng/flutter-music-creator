@@ -1,7 +1,5 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/foundation.dart';
 
 class AudioService {
   final AudioPlayer _audioPlayer = AudioPlayer();
@@ -9,9 +7,9 @@ class AudioService {
   Future<void> playAudio(String filePath) async {
     try {
       await _audioPlayer.play(DeviceFileSource(filePath));
-    } catch (error) {
+    } catch (e) {
       if (kDebugMode) {
-        print('Audio playback error: $error');
+        print('Audio playback error: $e');
       }
     }
   }
@@ -19,9 +17,9 @@ class AudioService {
   Future<void> stopPlayback() async {
     try {
       await _audioPlayer.stop();
-    } catch (error) {
+    } catch (e) {
       if (kDebugMode) {
-        print('Stop playback error: $error');
+        print('Stop playback error: $e');
       }
     }
   }
@@ -29,9 +27,9 @@ class AudioService {
   Future<void> pausePlayback() async {
     try {
       await _audioPlayer.pause();
-    } catch (error) {
+    } catch (e) {
       if (kDebugMode) {
-        print('Pause playback error: $error');
+        print('Pause playback error: $e');
       }
     }
   }

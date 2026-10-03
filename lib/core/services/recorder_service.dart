@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:record/record.dart';
 
 class RecorderService {
@@ -37,9 +34,11 @@ class RecorderService {
 
     final path = await _record.stop();
     _isRecording = false;
-    final storedPath = _currentRecordingPath;
+
+    final finalPath = path ?? _currentRecordingPath;
     _currentRecordingPath = null;
-    return path ?? storedPath;
+
+    return finalPath;
   }
 
   Future<void> dispose() async {

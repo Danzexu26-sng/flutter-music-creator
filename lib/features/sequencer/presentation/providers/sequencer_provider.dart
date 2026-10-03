@@ -24,14 +24,14 @@ class SequencerProvider extends ChangeNotifier {
   }
 
   void addTrackFromFile(String filePath, {String? customName}) {
-    final safeName = customName ?? 'Track ${_tracks.length + 1}';
     final track = AudioTrack(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
-      name: safeName,
+      name: customName ?? 'Track ${_tracks.length + 1}',
       filePath: filePath,
       duration: const Duration(seconds: 8),
       order: _tracks.length,
     );
+
     addTrack(track);
   }
 
@@ -68,6 +68,7 @@ class SequencerProvider extends ChangeNotifier {
     _isPlaying = false;
     _playTimer?.cancel();
     _playTimer = null;
+
     await _audioService.stopPlayback();
     notifyListeners();
   }
